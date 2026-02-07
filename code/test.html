@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>JS基础测试页</h1>
+    <p id="demo">这是一个原始段落。</p>
+    <button onclick="testFunction()">点击我试试</button>
+    <script>
+        function testFunction() {
+            document.getElementById("demo").innerHTML = "恭喜！JavaScript正常运行了！" + new Date();
+            alert("弹窗也出来了！");
+        }
+    </script>
+</body>
+</html>
