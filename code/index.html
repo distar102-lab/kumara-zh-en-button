@@ -63,6 +63,25 @@
         nav ul li a:hover {
             color: var(--color-gold);
         }
+        .language-switcher {
+            display: flex;
+            gap: 10px;
+            margin-left: 20px;
+        }
+        .lang-btn {
+            background: transparent;
+            border: 1px solid var(--color-green);
+            color: var(--color-green);
+            padding: 5px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        .lang-btn:hover {
+            background: var(--color-green);
+            color: white;
+        }
         nav .contact-btn {
             background: var(--color-gold);
             color: var(--color-white);
@@ -75,6 +94,7 @@
             nav ul { display: none; }
             nav .contact-btn { display: none; }
             nav .logo { font-size: 20px; }
+            .language-switcher { display: none; }
         }
         .hero {
             background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://cdn.pixabay.com/photo/2017/02/19/19/04/sri-lanka-2080324_1280.jpg');
@@ -340,63 +360,26 @@
     </style>
 </head>
 <body>
-    <!-- 语言切换按钮 - 放置在右上角 (已添加) -->
-    <div class="language-switcher" style="
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        z-index: 2000;
-        background: rgba(255, 255, 255, 0.95);
-        padding: 8px 15px;
-        border-radius: 20px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        font-size: 14px;
-        border: 1px solid #eee;
-    ">
-        <button 
-            onclick="switchLanguage('zh-CN')" 
-            class="lang-btn" 
-            style="
-                margin-right: 5px;
-                background: none;
-                border: none;
-                cursor: pointer;
-                font-weight: bold;
-                color: #333;
-            ">中文</button>
-        <span style="color: #ccc;">|</span>
-        <button 
-            onclick="switchLanguage('en')" 
-            class="lang-btn" 
-            style="
-                margin-left: 5px;
-                background: none;
-                border: none;
-                cursor: pointer;
-                color: #666;
-            ">English</button>
-    </div>
-
     <nav>
         <div class="container">
-            <!-- 已添加 data-key 属性 -->
-            <div class="logo" data-key="nav.logo">兰卡之旅</div>
+            <div class="logo" id="site-logo">兰卡之旅</div>
             <ul>
-                <li><a href="#about" data-key="nav.about">关于我</a></li>
-                <li><a href="#routes" data-key="nav.services">服务路线</a></li>
-                <li><a href="#contact" data-key="nav.contact">联系方式</a></li>
+                <li><a href="#about" id="nav-about">关于我</a></li>
+                <li><a href="#routes" id="nav-routes">服务路线</a></li>
+                <li><a href="#contact" id="nav-contact">联系方式</a></li>
             </ul>
-            <!-- 已添加 data-key 属性 -->
-            <a href="#contact" class="contact-btn" data-key="nav.book">立即预订</a>
+            <div class="language-switcher">
+                <button class="lang-btn" onclick="changeLanguage('zh')">中文</button>
+                <button class="lang-btn" onclick="changeLanguage('en')">English</button>
+            </div>
+            <a href="#contact" class="contact-btn" id="nav-book">立即预订</a>
         </div>
     </nav>
     <section class="hero">
         <div>
-            <!-- 已添加 data-key 属性 -->
-            <h1 data-key="hero.title">探索斯里兰卡的完美旅程</h1>
-            <p data-key="hero.subtitle">本地专业向导 · 独家秘境 · 贴心服务</p>
-            <!-- 已添加 data-key 属性 -->
-            <a href="#contact" class="cta-btn" data-key="hero.cta">联系我，开启旅程</a>
+            <h1 id="hero-title">探索斯里兰卡的完美旅程</h1>
+            <p id="hero-subtitle">本地专业向导 · 独家秘境 · 贴心服务</p>
+            <a href="#contact" class="cta-btn" id="hero-btn">联系我，开启旅程</a>
         </div>
     </section>
     <section class="about" id="about">
@@ -405,27 +388,26 @@
                 <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=320&h=400" alt="司机照片">
             </div>
             <div class="content">
-                <!-- 已添加 data-key 属性 -->
-                <h2 data-key="about.title">我是 Kumara</h2>
-                <p class="intro">
+                <h2 id="about-name">我是 Kumara</h2>
+                <p class="intro" id="about-intro">
                     您好！我是土生土长的斯里兰卡人，热爱这片美丽的土地。作为持证专业导游司机，我深知斯里兰卡每个角落的魅力所在。无论是茶园小径、海滩日出，还是古老寺庙，我都带您深入体验最地道的兰卡风情。
                 </p>
                 <div class="highlights">
                     <div class="highlight-item">
                         <i>✓</i>
-                        <span>本地10年驾驶经验，熟悉全岛路况</span>
+                        <span id="highlight1">本地10年驾驶经验，熟悉全岛路况</span>
                     </div>
                     <div class="highlight-item">
                         <i>✓</i>
-                        <span>独家秘境机位，避开人群</span>
+                        <span id="highlight2">独家秘境机位，避开人群</span>
                     </div>
                     <div class="highlight-item">
                         <i>✓</i>
-                        <span>专业应急路况处理，安全第一</span>
+                        <span id="highlight3">专业应急路况处理，安全第一</span>
                     </div>
                     <div class="highlight-item">
                         <i>✓</i>
-                        <span>中文/英文双语沟通，无障碍交流</span>
+                        <span id="highlight4">中文/英文双语沟通，无障碍交流</span>
                     </div>
                 </div>
             </div>
@@ -433,27 +415,25 @@
     </section>
     <section class="routes" id="routes">
         <div class="container">
-            <!-- 已添加 data-key 属性 -->
-            <h2 data-key="routes.title">热门旅游路线</h2>
-            <!-- 已添加 data-key 属性 -->
-            <p class="subtitle" data-key="routes.subtitle">精选三条经典路线，带您领略斯里兰卡之美</p>
+            <h2 id="routes-title">热门旅游路线</h2>
+            <p class="subtitle" id="routes-subtitle">精选三条经典路线，带您领略斯里兰卡之美</p>
             <div class="cards">
                 <div class="card">
                     <div class="card-img">
                         <img src="https://images.unsplash.com/photo-1620730098740-626c7e6b2e58?w=400" alt="茶园路线">
                     </div>
                     <div class="card-content">
-                        <div class="card-title">🍃 山城茶园线（5天4晚）</div>
-                        <p class="card-desc">
+                        <div class="card-title" id="route1-title">🍃 山城茶园线（5天4晚）</div>
+                        <p class="card-desc" id="route1-desc">
                             努瓦勒埃利耶茶园漫步、霍顿平原徒步、
                             茶工厂体验、亚当峰日出观景
                         </p>
                         <div class="card-features">
-                            <span class="feature-tag">茶园观光</span>
-                            <span class="feature-tag">徒步体验</span>
-                            <span class="feature-tag">独家机位</span>
+                            <span class="feature-tag" id="route1-tag1">茶园观光</span>
+                            <span class="feature-tag" id="route1-tag2">徒步体验</span>
+                            <span class="feature-tag" id="route1-tag3">独家机位</span>
                         </div>
-                        <a href="#contact" class="card-btn">了解详情</a>
+                        <a href="#contact" class="card-btn" id="route1-btn">了解详情</a>
                     </div>
                 </div>
                 <div class="card">
@@ -461,17 +441,17 @@
                         <img src="https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=400" alt="海岛风情线">
                     </div>
                     <div class="card-content">
-                        <div class="card-title">🌊 海岛风情线（4天3晚）</div>
-                        <p class="card-desc">
+                        <div class="card-title" id="route2-title">🌊 海岛风情线（4天3晚）</div>
+                        <p class="card-desc" id="route2-desc">
                             加勒古城漫步、米瑞莎观鲸、乌纳瓦图纳日落、
                             高跷渔夫拍摄、海鲜大餐
                         </p>
                         <div class="card-features">
-                            <span class="feature-tag">古城游览</span>
-                            <span class="feature-tag">海上观鲸</span>
-                            <span class="feature-tag">日落摄影</span>
+                            <span class="feature-tag" id="route2-tag1">古城游览</span>
+                            <span class="feature-tag" id="route2-tag2">海上观鲸</span>
+                            <span class="feature-tag" id="route2-tag3">日落摄影</span>
                         </div>
-                        <a href="#contact" class="card-btn">了解详情</a>
+                        <a href="#contact" class="card-btn" id="route2-btn">了解详情</a>
                     </div>
                 </div>
                 <div class="card">
@@ -479,18 +459,18 @@
                         <img src="https://images.unsplash.com/photo-1548013146-72479768bada?w=400" alt="文化遗迹线">
                     </div>
                     <div class="card-content">
-                        <div class="card-title">🏛️ 文化遗迹线（6天5晚）</div>
-                        <p class="card-desc">
+                        <div class="card-title" id="route3-title">🏛️ 文化遗迹线（6天5晚）</div>
+                        <p class="card-desc" id="route3-desc">
                             康提佛牙寺朝圣、锡吉里耶狮子岩、
                             丹布勒石窟寺、阿努拉德普勒古城、
                             波隆纳鲁沃遗迹
                         </p>
                         <div class="card-features">
-                            <span class="feature-tag">世界遗产</span>
-                            <span class="feature-tag">佛教文化</span>
-                            <span class="feature-tag">历史遗迹</span>
+                            <span class="feature-tag" id="route3-tag1">世界遗产</span>
+                            <span class="feature-tag" id="route3-tag2">佛教文化</span>
+                            <span class="feature-tag" id="route3-tag3">历史遗迹</span>
                         </div>
-                        <a href="#contact" class="card-btn">了解详情</a>
+                        <a href="#contact" class="card-btn" id="route3-btn">了解详情</a>
                     </div>
                 </div>
             </div>
@@ -498,41 +478,161 @@
     </section>
     <section class="contact" id="contact">
         <div class="container">
-            <!-- 已添加 data-key 属性 -->
-            <h2 data-key="contact.title">立即预订您的兰卡之旅</h2>
-            <!-- 已添加 data-key 属性 -->
-            <p class="subtitle" data-key="contact.subtitle">欢迎通过以下方式联系我，24小时快速响应</p>
+            <h2 id="contact-title">立即预订您的兰卡之旅</h2>
+            <p class="subtitle" id="contact-subtitle">欢迎通过以下方式联系我，24小时快速响应</p>
             <div class="contact-info">
                 <div class="contact-item">
-                    <h4>WhatsApp</h4>
+                    <h4 id="contact-whatsapp">WhatsApp</h4>
                     <a href="https://wa.me/94123456789" target="_blank">+94 123 456 789</a>
                 </div>
                 <div class="contact-item">
-                    <h4>微信 WeChat</h4>
-                    <p>SriLankaTour2024</p>
+                    <h4 id="contact-wechat">微信 WeChat</h4>
+                    <p id="contact-wechat-id">SriLankaTour2024</p>
                 </div>
                 <div class="contact-item">
-                    <h4>电子邮箱</h4>
+                    <h4 id="contact-email">电子邮箱</h4>
                     <a href="mailto:tour@srilanka.com">tour@srilanka.com</a>
                 </div>
             </div>
             <div class="contact-btns">
-                <!-- 已添加 data-key 属性 -->
-                <a href="https://wa.me/94123456789" target="_blank" class="whatsapp-btn" data-key="contact.whatsapp">
+                <a href="https://wa.me/94123456789" target="_blank" class="whatsapp-btn" id="contact-whatsapp-btn">
                     通过WhatsApp联系
                 </a>
-                <!-- 已添加 data-key 属性 -->
-                <a href="#" class="wechat-btn" data-key="contact.wechat">
+                <a href="#" class="wechat-btn" id="contact-wechat-btn">
                     添加微信咨询
                 </a>
             </div>
         </div>
     </section>
     <footer>
-        <p>© 2024 Sri Lanka Private Tour. All Rights Reserved.</p>
+        <p id="footer-text">© 2024 Sri Lanka Private Tour. All Rights Reserved.</p>
     </footer>
 
-    <!-- 引入多语言切换的JS文件 (已添加) -->
-    <script src="js/language-switcher.js"></script>
+    <script>
+        function changeLanguage(lang) {
+            if (lang === 'en') {
+                // Navigation
+                document.getElementById('site-logo').innerText = 'Lanka Tour';
+                document.getElementById('nav-about').innerText = 'About';
+                document.getElementById('nav-routes').innerText = 'Routes';
+                document.getElementById('nav-contact').innerText = 'Contact';
+                document.getElementById('nav-book').innerText = 'Book Now';
+                
+                // Hero section
+                document.getElementById('hero-title').innerText = 'Discover the Perfect Sri Lanka Journey';
+                document.getElementById('hero-subtitle').innerText = 'Local Guide · Hidden Gems · Personalized Service';
+                document.getElementById('hero-btn').innerText = 'Contact Me';
+                
+                // About section
+                document.getElementById('about-name').innerText = 'I\'m Kumara';
+                document.getElementById('about-intro').innerHTML = 'Hello! I am a native Sri Lankan who loves this beautiful land. As a licensed professional tour guide and driver, I know every corner of Sri Lanka\'s charm. Whether it\'s tea trails, beach sunrises, or ancient temples, I will take you to experience the most authentic Lankan style.';
+                document.getElementById('highlight1').innerText = '10+ years local driving experience, familiar with island-wide roads';
+                document.getElementById('highlight2').innerText = 'Exclusive hidden photo spots, avoid crowds';
+                document.getElementById('highlight3').innerText = 'Professional emergency handling, safety first';
+                document.getElementById('highlight4').innerText = 'Bilingual communication (Chinese/English)';
+                
+                // Routes section
+                document.getElementById('routes-title').innerText = 'Popular Tour Routes';
+                document.getElementById('routes-subtitle').innerText = 'Three classic routes to showcase Sri Lanka\'s beauty';
+                
+                // Route 1
+                document.getElementById('route1-title').innerText = '🍃 Tea Country Route (5D4N)';
+                document.getElementById('route1-desc').innerText = 'Nuwara Eliya tea plantation walk, Horton Plains trek, tea factory experience, Adam\'s Peak sunrise viewing';
+                document.getElementById('route1-tag1').innerText = 'Tea Plantation';
+                document.getElementById('route1-tag2').innerText = 'Trekking';
+                document.getElementById('route1-tag3').innerText = 'Photo Spots';
+                document.getElementById('route1-btn').innerText = 'Details';
+                
+                // Route 2
+                document.getElementById('route2-title').innerText = '🌊 Coastal Paradise Route (4D3N)';
+                document.getElementById('route2-desc').innerText = 'Galle Fort walk, Mirissa whale watching, Unawatuna sunset, stilt fisherman photography, seafood feast';
+                document.getElementById('route2-tag1').innerText = 'Heritage';
+                document.getElementById('route2-tag2').innerText = 'Whale Watching';
+                document.getElementById('route2-tag3').innerText = 'Sunset';
+                document.getElementById('route2-btn').innerText = 'Details';
+                
+                // Route 3
+                document.getElementById('route3-title').innerText = '🏛️ Cultural Heritage Route (6D5N)';
+                document.getElementById('route3-desc').innerText = 'Kandy Temple of Tooth pilgrimage, Sigiriya Lion Rock, Dambulla Cave Temple, Anuradhapura, Polonnaruwa ruins';
+                document.getElementById('route3-tag1').innerText = 'UNESCO';
+                document.getElementById('route3-tag2').innerText = 'Buddhist';
+                document.getElementById('route3-tag3').innerText = 'History';
+                document.getElementById('route3-btn').innerText = 'Details';
+                
+                // Contact section
+                document.getElementById('contact-title').innerText = 'Book Your Sri Lanka Tour Now';
+                document.getElementById('contact-subtitle').innerText = '24h quick response, contact me via:';
+                document.getElementById('contact-whatsapp').innerText = 'WhatsApp';
+                document.getElementById('contact-wechat').innerText = 'WeChat';
+                document.getElementById('contact-email').innerText = 'Email';
+                document.getElementById('contact-whatsapp-btn').innerText = 'Contact via WhatsApp';
+                document.getElementById('contact-wechat-btn').innerText = 'Add WeChat';
+                
+                // Footer
+                document.getElementById('footer-text').innerText = '© 2024 Sri Lanka Private Tour. All Rights Reserved.';
+                
+            } else {
+                // Navigation
+                document.getElementById('site-logo').innerText = '兰卡之旅';
+                document.getElementById('nav-about').innerText = '关于我';
+                document.getElementById('nav-routes').innerText = '服务路线';
+                document.getElementById('nav-contact').innerText = '联系方式';
+                document.getElementById('nav-book').innerText = '立即预订';
+                
+                // Hero section
+                document.getElementById('hero-title').innerText = '探索斯里兰卡的完美旅程';
+                document.getElementById('hero-subtitle').innerText = '本地专业向导 · 独家秘境 · 贴心服务';
+                document.getElementById('hero-btn').innerText = '联系我，开启旅程';
+                
+                // About section
+                document.getElementById('about-name').innerText = '我是 Kumara';
+                document.getElementById('about-intro').innerHTML = '您好！我是土生土长的斯里兰卡人，热爱这片美丽的土地。作为持证专业导游司机，我深知斯里兰卡每个角落的魅力所在。无论是茶园小径、海滩日出，还是古老寺庙，我都带您深入体验最地道的兰卡风情。';
+                document.getElementById('highlight1').innerText = '本地10年驾驶经验，熟悉全岛路况';
+                document.getElementById('highlight2').innerText = '独家秘境机位，避开人群';
+                document.getElementById('highlight3').innerText = '专业应急路况处理，安全第一';
+                document.getElementById('highlight4').innerText = '中文/英文双语沟通，无障碍交流';
+                
+                // Routes section
+                document.getElementById('routes-title').innerText = '热门旅游路线';
+                document.getElementById('routes-subtitle').innerText = '精选三条经典路线，带您领略斯里兰卡之美';
+                
+                // Route 1
+                document.getElementById('route1-title').innerText = '🍃 山城茶园线（5天4晚）';
+                document.getElementById('route1-desc').innerText = '努瓦勒埃利耶茶园漫步、霍顿平原徒步、茶工厂体验、亚当峰日出观景';
+                document.getElementById('route1-tag1').innerText = '茶园观光';
+                document.getElementById('route1-tag2').innerText = '徒步体验';
+                document.getElementById('route1-tag3').innerText = '独家机位';
+                document.getElementById('route1-btn').innerText = '了解详情';
+                
+                // Route 2
+                document.getElementById('route2-title').innerText = '🌊 海岛风情线（4天3晚）';
+                document.getElementById('route2-desc').innerText = '加勒古城漫步、米瑞莎观鲸、乌纳瓦图纳日落、高跷渔夫拍摄、海鲜大餐';
+                document.getElementById('route2-tag1').innerText = '古城游览';
+                document.getElementById('route2-tag2').innerText = '海上观鲸';
+                document.getElementById('route2-tag3').innerText = '日落摄影';
+                document.getElementById('route2-btn').innerText = '了解详情';
+                
+                // Route 3
+                document.getElementById('route3-title').innerText = '🏛️ 文化遗迹线（6天5晚）';
+                document.getElementById('route3-desc').innerText = '康提佛牙寺朝圣、锡吉里耶狮子岩、丹布勒石窟寺、阿努拉德普勒古城、波隆纳鲁沃遗迹';
+                document.getElementById('route3-tag1').innerText = '世界遗产';
+                document.getElementById('route3-tag2').innerText = '佛教文化';
+                document.getElementById('route3-tag3').innerText = '历史遗迹';
+                document.getElementById('route3-btn').innerText = '了解详情';
+                
+                // Contact section
+                document.getElementById('contact-title').innerText = '立即预订您的兰卡之旅';
+                document.getElementById('contact-subtitle').innerText = '欢迎通过以下方式联系我，24小时快速响应';
+                document.getElementById('contact-whatsapp').innerText = 'WhatsApp';
+                document.getElementById('contact-wechat').innerText = '微信 WeChat';
+                document.getElementById('contact-email').innerText = '电子邮箱';
+                document.getElementById('contact-whatsapp-btn').innerText = '通过WhatsApp联系';
+                document.getElementById('contact-wechat-btn').innerText = '添加微信咨询';
+                
+                // Footer
+                document.getElementById('footer-text').innerText = '© 2024 Sri Lanka Private Tour. All Rights Reserved.';
+            }
+        }
+    </script>
 </body>
 </html>
